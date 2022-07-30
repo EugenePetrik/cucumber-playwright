@@ -1,16 +1,18 @@
-import {Given} from '@cucumber/cucumber'
-import {ScenarioWorld} from './setup/world';
+import { Given } from '@cucumber/cucumber';
+import { PageId } from '../env/global';
+import { navigateToPage } from '../support/navigation-behavior';
+import { ScenarioWorld } from './setup/world';
 
-Given(
-    /^I am on the "([^"]*)" page$/,
-    async function (this: ScenarioWorld, pageId: string) {
-        const {
-            screen: {page},
-        } = this;
+Given(/^I am on the "([^"]*)" page$/, async function (this: ScenarioWorld, pageId: PageId) {
+    const {
+        screen: { page },
+        globalVariables,
+        globalConfig,
+    } = this;
 
-        console.log(`I am on the ${pageId} page`);
+    console.log(`I am on the ${pageId} page`);
 
-        await page.goto("http://localhost:3000/")
+    globalVariables.currentScreen = pageId;
 
-    }
-)
+    await navigateToPage(page, pageId, globalConfig);
+});

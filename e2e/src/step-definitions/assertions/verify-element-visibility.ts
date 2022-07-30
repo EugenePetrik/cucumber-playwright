@@ -1,33 +1,21 @@
-import {Then} from '@cucumber/cucumber'
-import {expect} from '@playwright/test'
-import {ScenarioWorld} from "../setup/world";
+import { Then } from '@cucumber/cucumber';
+import { getElementLocator } from '../../support/web-element-helper';
+import { ScenarioWorld } from '../setup/world';
+import { waitFor } from '../../support/wait-for-behavior';
 
-Then(
-    /^the "([^"]*)" should be displayed$/,
-    async function (this: ScenarioWorld, elementKey: string) {
-        const {
-            screen: {page},
-        } = this;
+Then(/^the "([^"]*)" should be displayed$/, async function (this: ScenarioWorld, elementKey: string) {
+    const {
+        screen: { page },
+        globalVariables,
+        globalConfig,
+    } = this;
 
-        console.log(`the ${elementKey} should be displayed`);
+    console.log(`the ${elementKey} should be displayed`);
 
-        const locator = page.locator("[data-id='header-logo']")
-        await expect(locator).toBeVisible();
-    }
-);
+    const elementIdentifier = getElementLocator(page, elementKey, globalVariables, globalConfig);
 
-Then(
-    /^the "([^"]*)" should contain the text "(.*)"$/,
-    async function (this: ScenarioWorld, elementKey: string, expectedElementText: string) {
-        const {
-            screen: {page},
-        } = this;
-
-        console.log(`the ${elementKey} should contain the text ${expectedElementText}`)
-
-        const content = await page.textContent("[data-id='contacts']")
-
-        expect(content).toBe(expectedElementText)
-
-    }
-)
+    await waitFor(async () => {
+        const isElementVisible = (await page.$(elementIdentifier)) != null;
+        return isElementVisible;
+    });
+});

@@ -10,12 +10,28 @@ Then(/^the "([^"]*)" should contain the text "(.*)"$/, async function (this: Sce
         globalConfig,
     } = this;
 
-    console.log(`the ${elementKey} should contain the text ${expectedElementText}`);
+    console.log(`The ${elementKey} should contain the text ${expectedElementText}`);
 
     const elementIdentifier = getElementLocator(page, elementKey, globalConfig);
 
     await waitFor(async () => {
         const elementText = await page.textContent(elementIdentifier);
         return elementText?.includes(expectedElementText);
+    });
+});
+
+Then(/^the "([^"]*)" should equal the text "([^"]*)"$/, async function (this: ScenarioWorld, elementKey: ElementKey, expectedElementText: string) {
+    const {
+        screen: { page },
+        globalConfig,
+    } = this;
+
+    console.log(`The ${elementKey} should equal the text ${expectedElementText}`);
+
+    const elementIdentifier = getElementLocator(page, elementKey, globalConfig);
+
+    await waitFor(async () => {
+        const elementText = await page.textContent(elementIdentifier);
+        return elementText === expectedElementText;
     });
 });

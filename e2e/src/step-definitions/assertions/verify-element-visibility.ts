@@ -9,7 +9,7 @@ Then(/^the "([^"]*)" should be displayed$/, async function (this: ScenarioWorld,
         globalConfig,
     } = this;
 
-    console.log(`the ${elementKey} should be displayed`);
+    console.log(`The ${elementKey} should be displayed`);
 
     const elementIdentifier = getElementLocator(page, elementKey, globalConfig);
 

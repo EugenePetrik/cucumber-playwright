@@ -1,9 +1,11 @@
 {
   "header logo": "[data-id='header-logo']",
+  "contact": "[data-id='contact']",
   "name": "[data-id='name']",
   "gender": "[data-id='gender']",
   "phone": "[data-id='phone']",
   "street": "[data-id='street']",
   "city": "[data-id='city']",
-  "save": "[data-id='save-button']"
+  "save": "[data-id='save-button']",
+  "playground": "[data-id='playground-button']"
 }

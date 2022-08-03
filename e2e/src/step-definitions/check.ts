@@ -1,6 +1,6 @@
 import { Then } from '@cucumber/cucumber';
 import { ScenarioWorld } from './setup/world';
-import { checkElement } from '../support/html-behavior';
+import { checkElement, uncheckElement } from '../support/html-behavior';
 import { waitFor } from '../support/wait-for-behavior';
 import { getElementLocator } from '../support/web-element-helper';
 import { ElementKey } from '../env/global';
@@ -22,7 +22,11 @@ Then(
                 state: 'visible',
             });
             if (result) {
-                await checkElement(page, elementIdentifier);
+                if (uncheck) {
+                    await uncheckElement(page, elementIdentifier);
+                } else {
+                    await checkElement(page, elementIdentifier);
+                }
             }
             return result;
         });

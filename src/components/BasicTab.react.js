@@ -27,7 +27,7 @@ export class BasicTab extends React.Component {
         return (
             <>
                 <ThemeProvider theme={theme}>
-                    <Link data-id="new-tab-button" target="_blank" href="/public">Link</Link>
+                    <Link data-id="new-tab-button" target="_blank" href="/">Link</Link>
                 </ThemeProvider>
             </>
         );

@@ -73,7 +73,7 @@ export class BasicAvatars extends React.Component {
                             anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
                             variant="dot"
                         >
-                            <a data-id="avatar" rel="noopener noreferrer" target="_blank" href="src/components/BasicAvatars.react"><Avatar alt="Cameron Bradley" src={cameron} /></a>
+                            <a data-id="avatar" rel="noopener noreferrer" target="_blank" href="https://www.linkedin.com/in/cambradley/"><Avatar alt="Cameron Bradley" src={cameron} /></a>
                         </StyledBadge>
                         <Badge
                             overlap="circular"
@@ -82,7 +82,7 @@ export class BasicAvatars extends React.Component {
                                 <SmallAvatar data-id="small-avatar" alt="Remy Sharp" src={testingtalks} />
                             }
                         >
-                            <a data-id="avatar" rel="noopener noreferrer" target="_blank" href="src/components/BasicAvatars.react"><Avatar alt="Testing Talks" src={testingtalks} /></a>
+                            <a data-id="avatar" rel="noopener noreferrer" target="_blank" href="https://www.testingtalks.com.au/"><Avatar alt="Testing Talks" src={testingtalks} /></a>
                         </Badge>
                     </Stack>
                 </ThemeProvider>

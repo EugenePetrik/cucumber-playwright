@@ -16,7 +16,7 @@ html, body {
 }
 
 .testing-talks-logo {
-  background-image: url(images/desktop-header-logo.png);
+  background-image: url(./images/desktop-header-logo.png);
   background-repeat: no-repeat;
   width: 330px;
   height: 50px;
@@ -25,7 +25,7 @@ html, body {
 
 @media only screen and (max-width: 600px) {
   .testing-talks-logo {
-    background-image: url(images/mobile-header-logo.png);
+    background-image: url(./images/mobile-header-logo.png);
     width: 50px;
     height: 50px;
     background-repeat: no-repeat;

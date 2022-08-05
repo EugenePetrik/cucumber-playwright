@@ -55,3 +55,8 @@ export const inputValueOnPage = async (
     await pages[pageIndex].focus(elementIdentifier);
     await pages[pageIndex].fill(elementIdentifier, inputValue);
 };
+
+export const getAttributeText = async (page: Page, elementIdentifier: ElementLocator, attribute: string): Promise<string | null> => {
+    const attributeText = await page.locator(elementIdentifier).getAttribute(attribute);
+    return attributeText;
+};

@@ -6,14 +6,14 @@ import { getElementLocator } from '../support/web-element-helper';
 import { ElementKey } from '../env/global';
 
 Then(
-    /^I (check)?(uncheck)? the "([^"]*)" (?:check box|radio button)$/,
+    /^I (check)?(uncheck)? the "([^"]*)" (?:check box|radio button|switch)$/,
     async function (this: ScenarioWorld, checked: boolean, uncheck: boolean, elementKey: ElementKey) {
         const {
             screen: { page },
             globalConfig,
         } = this;
 
-        console.log(`I ${uncheck ? 'uncheck' : 'check'} the ${elementKey} check box|radio button`);
+        console.log(`I ${uncheck ? 'uncheck' : 'check'} the ${elementKey} check box|radio button|switch`);
 
         const elementIdentifier = getElementLocator(page, elementKey, globalConfig);
 

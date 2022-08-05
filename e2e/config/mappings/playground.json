@@ -24,5 +24,22 @@
   "my button": "[data-id='my-button']",
   "basic": "[data-id='basic-table']",
   "switch one": "[data-id='switch-one']",
-  "switch two": "[data-id='switch-two']"
+  "switch two": "[data-id='switch-two']",
+  "browser alert": "[data-id='browser-alert']",
+  "error alert": "[data-id='error-alert']",
+  "warning alert": "[data-id='warning-alert']",
+  "info alert": "[data-id='info-alert']",
+  "success alert": "[data-id='success-alert']",
+  "tooltip": "[data-id='tooltip']",
+  "textarea": "[data-id='textarea']",
+  "show hide button": "[data-id='show-hide-button']",
+  "show hide text": "[data-id='show-hide-text']",
+  "first value": "[data-id='first-value']",
+  "second value": "[data-id='second-value']",
+  "third value": "[data-id='third-value']",
+  "fourth value": "[data-id='fourth-value']",
+  "fifth value": "[data-id='fifth-value']",
+  "value one": "[data-id='value-one']",
+  "value two": "[data-id='value-two']",
+  "value three": "[data-id='value-three']"
 }

@@ -1,5 +1,10 @@
-#cucumber tag
-tag=$1
+#environment
+env=$1
 
-#run cucumber tests
-yarn run cucumber --profile $tag || yarn run postcucumber
+#cucumber tag
+tag=$2
+
+#run cucumber tests & on failure run postcucumber
+yarn run cucumber:$env --profile $tag || yarn run postcucumber
+
+# ./run_tests.sh localhost dev

@@ -5,9 +5,11 @@ export type PageElementMappings = Record<PageId, Record<ElementKey, ElementLocat
 export type PagesConfig = Record<PageId, Record<string, string>>;
 export type HostsConfig = Record<string, string>;
 export type GlobalVariables = { [key: string]: string };
+export type EmailsConfig = Record<string, string>;
 
 export type GlobalConfig = {
     pageElementMappings: PageElementMappings;
     hostsConfig: HostsConfig;
     pagesConfig: PagesConfig;
+    emailsConfig: EmailsConfig;
 };

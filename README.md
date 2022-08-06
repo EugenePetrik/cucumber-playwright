@@ -32,10 +32,10 @@ cd e2e
 yarn install
 ```
 
-3. Run tests on localhost with production tag
+3. Run tests on localhost with regression tag
 
 ```bash
-./run_tests.sh localhost production
+./run_tests.sh localhost regression
 ```
 
 4. Run tests on production with smoke tag

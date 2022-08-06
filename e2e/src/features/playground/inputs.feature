@@ -2,8 +2,8 @@ Feature: As a user I can interact with different types of inputs
 
   Background:
     Given I am on the "home" page
-    And I click the "playground" button
-    When I am directed to the "playground" page
+    When I click the "playground" button
+    Then I am directed to the "playground" page
 
   @smoke
   @regression

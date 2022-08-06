@@ -4,9 +4,9 @@ Feature: As a user I can interact with radio buttons
   @regression
   Scenario: As a user I can interact and assert on radio buttons
     Given I am on the "home" page
-    And I click the "playground" button
-    When I am directed to the "playground" page
-    Then the "female label" should contain the text "Female"
+    When I click the "playground" button
+    Then I am directed to the "playground" page
+    And the "female label" should contain the text "Female"
     And the "male label" should contain the text "Male"
     And the "female label" should not contain the text "Male"
     And the "male label" should not contain the text "Female"

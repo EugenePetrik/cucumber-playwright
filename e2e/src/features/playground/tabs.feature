@@ -4,9 +4,9 @@ Feature: As a user I can interact with tabs
   @regression
   Scenario: As a user I can interact and assert on new tabs
     Given I am on the "home" page
-    And I click the "playground" button
-    When I am directed to the "playground" page
-    And I click the "new tab" button
+    When I click the "playground" button
+    Then I am directed to the "playground" page
+    When I click the "new tab" button
     Then the "2nd" tab should contain the title "Contacts"
     And the "1st" tab should contain the title "Playground"
     When I fill in the "search" input on the "2nd" tab with "Sloane Juarez"

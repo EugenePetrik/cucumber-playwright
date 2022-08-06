@@ -4,9 +4,9 @@ Feature: As a user I can interact with buttons at index
   @regression
   Scenario: As a user I can interact and assert on buttons at index
     Given I am on the "home" page
-    And I click the "playground" button
-    When I am directed to the "playground" page
-    And I click the "1st" "my button" button
+    When I click the "playground" button
+    Then I am directed to the "playground" page
+    When I click the "1st" "my button" button
     Then the "1st" "my button" should contain the text "One"
     When I click the "2nd" "my button" button
     Then the "2nd" "my button" should contain the text "Two"

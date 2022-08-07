@@ -6,7 +6,8 @@ Feature: As a user I can interact with iframes
     Given I am on the "home" page
     When I click the "playground" button
     Then I am directed to the "playground" page
-    When I fill in the "search" input on the "basic iframe" iframe with "Sloane Juarez"
+    When I scroll to the "basic iframe"
+    And I fill in the "search" input on the "basic iframe" iframe with "Sloane Juarez"
     Then the "contact" on the "basic iframe" iframe should be displayed
     And the "full name label" on the "basic iframe" iframe should contain the text "Name:"
     And the "name" on the "basic iframe" iframe should equal the text "Sloane Juarez"

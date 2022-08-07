@@ -1,5 +1,5 @@
 export const waitFor = async <T>(predicate: () => T | Promise<T>, options?: { timeout?: number; wait?: number }): Promise<T> => {
-    const { timeout = 10_000, wait = 2_000 } = options || {};
+    const { timeout = 20_000, wait = 2_000 } = options || {};
 
     const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
     const startDate = new Date();

@@ -29,17 +29,16 @@ export const uncheckElement = async (page: Page, elementIdentifier: ElementLocat
 };
 
 export const getValue = async (page: Page, elementIdentifier: ElementLocator): Promise<string | null> => {
-    const value = await page.$eval<string, HTMLSelectElement>(elementIdentifier, el => {
+    await page.waitForSelector(elementIdentifier);
+    return page.$eval<string, HTMLSelectElement>(elementIdentifier, el => {
         return el.value;
     });
-    return value;
 };
 
 export const getIframeElement = async (page: Page, iframeIdentifier: ElementLocator): Promise<Frame | undefined | null> => {
     await page.waitForSelector(iframeIdentifier);
     const elementHandle = await page.$(iframeIdentifier);
-    const elementIframe = await elementHandle?.contentFrame();
-    return elementIframe;
+    return elementHandle?.contentFrame();
 };
 
 export const inputValueOnIframe = async (elementIframe: Frame, elementIdentifier: ElementLocator, input: string): Promise<void> => {
@@ -57,6 +56,10 @@ export const inputValueOnPage = async (
 };
 
 export const getAttributeText = async (page: Page, elementIdentifier: ElementLocator, attribute: string): Promise<string | null> => {
-    const attributeText = await page.locator(elementIdentifier).getAttribute(attribute);
-    return attributeText;
+    return page.locator(elementIdentifier).getAttribute(attribute);
+};
+
+export const scrollIntoView = async (page: Page, elementIdentifier: ElementLocator): Promise<void> => {
+    const element = await page.locator(elementIdentifier);
+    await element.scrollIntoViewIfNeeded();
 };

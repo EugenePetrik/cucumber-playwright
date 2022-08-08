@@ -3,6 +3,7 @@ import { PageId } from '../env/global';
 import { navigateToPage, currentPathMatchesPageId, reloadPage } from '../support/navigation-behavior';
 import { ScenarioWorld } from './setup/world';
 import { waitFor } from '../support/wait-for-behavior';
+import { logger } from '../logger';
 
 Given(/^I am on the "([^"]*)" page$/, async function (this: ScenarioWorld, pageId: PageId) {
     const {
@@ -10,7 +11,7 @@ Given(/^I am on the "([^"]*)" page$/, async function (this: ScenarioWorld, pageI
         globalConfig,
     } = this;
 
-    console.log(`I am on the ${pageId} page`);
+    logger.log(`I am on the ${pageId} page`);
 
     await navigateToPage(page, pageId, globalConfig);
 
@@ -23,7 +24,7 @@ Given(/^I am directed to the "([^"]*)" page$/, async function (this: ScenarioWor
         globalConfig,
     } = this;
 
-    console.log(`I am directed to the ${pageId} page`);
+    logger.log(`I am directed to the ${pageId} page`);
 
     await waitFor(() => currentPathMatchesPageId(page, pageId, globalConfig));
 });
@@ -34,7 +35,7 @@ Given(/^I refresh the "([^"]*)" page$/, async function (this: ScenarioWorld, pag
         globalConfig,
     } = this;
 
-    console.log(`I refresh the ${pageId} page`);
+    logger.log(`I refresh the ${pageId} page`);
 
     await reloadPage(page);
 

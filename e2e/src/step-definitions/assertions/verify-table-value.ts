@@ -3,6 +3,7 @@ import { ScenarioWorld } from '../setup/world';
 import { getElementLocator } from '../../support/web-element-helper';
 import { ElementKey } from '../../env/global';
 import { waitFor } from '../../support/wait-for-behavior';
+import { logger } from '../../logger';
 
 When(
     /^the "([^"]*)" table should( not)? equal the following:$/,
@@ -12,7 +13,7 @@ When(
             globalConfig,
         } = this;
 
-        console.log(`The ${elementKey} table should ${negate ? 'not' : ''} equal the following:`);
+        logger.log(`The ${elementKey} table should ${negate ? 'not' : ''} equal the following:`);
 
         const elementIdentifier = getElementLocator(page, elementKey, globalConfig);
 
@@ -24,8 +25,8 @@ When(
                 });
             });
 
-            console.log('HTML table ', JSON.stringify(dataBefore));
-            console.log('Cucumber table ', JSON.stringify(dataTable.raw()));
+            logger.log('HTML table ', JSON.stringify(dataBefore));
+            logger.log('Cucumber table ', JSON.stringify(dataTable.raw()));
 
             return (JSON.stringify(dataBefore) === JSON.stringify(dataTable.raw())) === !negate;
         });

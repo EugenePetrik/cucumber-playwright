@@ -4,6 +4,7 @@ import { clickElement, clickElementAtIndex } from '../support/html-behavior';
 import { waitFor } from '../support/wait-for-behavior';
 import { getElementLocator } from '../support/web-element-helper';
 import { ElementKey } from '../env/global';
+import { logger } from '../logger';
 
 When(/^I click the "([^"]*)" (?:button|link|icon|element)$/, async function (this: ScenarioWorld, elementKey: ElementKey) {
     const {
@@ -11,7 +12,7 @@ When(/^I click the "([^"]*)" (?:button|link|icon|element)$/, async function (thi
         globalConfig,
     } = this;
 
-    console.log(`I click the ${elementKey} (?:button|link|icon|element)`);
+    logger.log(`I click the ${elementKey} (?:button|link|icon|element)`);
 
     const elementIdentifier = getElementLocator(page, elementKey, globalConfig);
 
@@ -34,7 +35,7 @@ When(
             globalConfig,
         } = this;
 
-        console.log(`I click the ${elementPosition} ${elementKey} (?:button|link|icon|element|radio button)`);
+        logger.log(`I click the ${elementPosition} ${elementKey} (?:button|link|icon|element|radio button)`);
 
         const elementIdentifier = getElementLocator(page, elementKey, globalConfig);
 

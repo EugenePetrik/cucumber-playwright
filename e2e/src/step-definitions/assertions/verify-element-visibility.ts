@@ -3,6 +3,7 @@ import { getElementLocator } from '../../support/web-element-helper';
 import { ScenarioWorld } from '../setup/world';
 import { waitFor } from '../../support/wait-for-behavior';
 import { ElementKey } from '../../env/global';
+import { logger } from '../../logger';
 
 Then(/^the "([^"]*)" should( not)? be displayed$/, async function (this: ScenarioWorld, elementKey: string, negate: boolean) {
     const {
@@ -10,7 +11,7 @@ Then(/^the "([^"]*)" should( not)? be displayed$/, async function (this: Scenari
         globalConfig,
     } = this;
 
-    console.log(`The ${elementKey} should ${negate ? 'not' : ''} be displayed`);
+    logger.log(`The ${elementKey} should ${negate ? 'not' : ''} be displayed`);
 
     const elementIdentifier = getElementLocator(page, elementKey, globalConfig);
 
@@ -28,7 +29,7 @@ Then(
             globalConfig,
         } = this;
 
-        console.log(`The ${elementPosition} ${elementKey} should ${negate ? 'not' : ''} be displayed`);
+        logger.log(`The ${elementPosition} ${elementKey} should ${negate ? 'not' : ''} be displayed`);
 
         const elementIdentifier = getElementLocator(page, elementKey, globalConfig);
         const index = Number(elementPosition.match(/\d/g)?.join('')) - 1;
@@ -48,7 +49,7 @@ Then(
             globalConfig,
         } = this;
 
-        console.log(`I should ${negate ? 'not' : ''} see ${count} ${elementKey} displayed`);
+        logger.log(`I should ${negate ? 'not' : ''} see ${count} ${elementKey} displayed`);
 
         const elementIdentifier = getElementLocator(page, elementKey, globalConfig);
 

@@ -4,6 +4,7 @@ import { ElementKey } from '../../env/global';
 import { getElementLocator } from '../../support/web-element-helper';
 import { waitFor } from '../../support/wait-for-behavior';
 import { getValue, getAttributeText } from '../../support/html-behavior';
+import { logger } from '../../logger';
 
 Then(
     /^the "([^"]*)" should( not)? contain the text "(.*)"$/,
@@ -13,7 +14,7 @@ Then(
             globalConfig,
         } = this;
 
-        console.log(`The ${elementKey} should ${negate ? 'not' : ''} contain the text ${expectedElementText}`);
+        logger.log(`The ${elementKey} should ${negate ? 'not' : ''} contain the text ${expectedElementText}`);
 
         const elementIdentifier = getElementLocator(page, elementKey, globalConfig);
 
@@ -32,14 +33,14 @@ Then(
             globalConfig,
         } = this;
 
-        console.log(`The ${elementKey} should ${negate ? 'not' : ''} equal the text ${expectedElementText}`);
+        logger.log(`The ${elementKey} should ${negate ? 'not' : ''} equal the text ${expectedElementText}`);
 
         const elementIdentifier = getElementLocator(page, elementKey, globalConfig);
 
         await waitFor(async () => {
             const elementText = await page.textContent(elementIdentifier);
-            console.log(elementText);
-            console.log(expectedElementText);
+            logger.log(elementText);
+            logger.log(expectedElementText);
             return (elementText === expectedElementText) === !negate;
         });
     },
@@ -53,7 +54,7 @@ Then(
             globalConfig,
         } = this;
 
-        console.log(`The ${elementKey} should ${negate ? 'not' : ''} contain the value ${elementValue}`);
+        logger.log(`The ${elementKey} should ${negate ? 'not' : ''} contain the value ${elementValue}`);
 
         const elementIdentifier = getElementLocator(page, elementKey, globalConfig);
 
@@ -72,7 +73,7 @@ Then(
             globalConfig,
         } = this;
 
-        console.log(`The ${elementKey} should ${negate ? 'not' : ''} equal the value ${elementValue}`);
+        logger.log(`The ${elementKey} should ${negate ? 'not' : ''} equal the value ${elementValue}`);
 
         const elementIdentifier = getElementLocator(page, elementKey, globalConfig);
 
@@ -89,7 +90,7 @@ Then(/^the "([^"]*)" should( not)? be enabled$/, async function (this: ScenarioW
         globalConfig,
     } = this;
 
-    console.log(`The ${elementKey} should ${negate ? 'not' : ''} be enabled`);
+    logger.log(`The ${elementKey} should ${negate ? 'not' : ''} be enabled`);
 
     const elementIdentifier = getElementLocator(page, elementKey, globalConfig);
 
@@ -107,7 +108,7 @@ Then(
             globalConfig,
         } = this;
 
-        console.log(`The ${elementPosition} ${elementKey} should ${negate ? 'not' : ''} contain the text ${expectedElementText}`);
+        logger.log(`The ${elementPosition} ${elementKey} should ${negate ? 'not' : ''} contain the text ${expectedElementText}`);
 
         const elementIdentifier = getElementLocator(page, elementKey, globalConfig);
         const index = Number(elementPosition.match(/\d/g)?.join('')) - 1;
@@ -127,7 +128,7 @@ Then(
             globalConfig,
         } = this;
 
-        console.log(`The ${elementKey} ${attribute} attribute should ${negate ? 'not' : ''} contain the text ${expectedElementText}`);
+        logger.log(`The ${elementKey} ${attribute} attribute should ${negate ? 'not' : ''} contain the text ${expectedElementText}`);
 
         const elementIdentifier = getElementLocator(page, elementKey, globalConfig);
 

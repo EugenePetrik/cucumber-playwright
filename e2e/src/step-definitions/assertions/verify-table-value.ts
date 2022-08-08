@@ -2,8 +2,9 @@ import { When, DataTable } from '@cucumber/cucumber';
 import { ScenarioWorld } from '../setup/world';
 import { getElementLocator } from '../../support/web-element-helper';
 import { ElementKey } from '../../env/global';
-import { waitFor } from '../../support/wait-for-behavior';
+import { waitFor, waitForSelector } from '../../support/wait-for-behavior';
 import { logger } from '../../logger';
+import { getTableData } from '../../support/html-behavior';
 
 When(
     /^the "([^"]*)" table should( not)? equal the following:$/,
@@ -18,17 +19,18 @@ When(
         const elementIdentifier = getElementLocator(page, elementKey, globalConfig);
 
         await waitFor(async () => {
-            const dataBefore = await page.$$eval(elementIdentifier + ' tbody tr', rows => {
-                return rows.map(row => {
-                    const cells = row.querySelectorAll('td');
-                    return Array.from(cells).map(cell => cell.textContent);
-                });
-            });
+            const elementStable = await waitForSelector(page, elementIdentifier);
 
-            logger.log('HTML table ', JSON.stringify(dataBefore));
-            logger.log('Cucumber table ', JSON.stringify(dataTable.raw()));
+            if (elementStable) {
+                const tableData = await getTableData(page, elementIdentifier);
 
-            return (JSON.stringify(dataBefore) === JSON.stringify(dataTable.raw())) === !negate;
+                logger.log('HTML table ', JSON.stringify(tableData));
+                logger.log('Cucumber table ', JSON.stringify(dataTable.raw()));
+
+                return (tableData === JSON.stringify(dataTable.raw())) === !negate;
+            } else {
+                return elementStable;
+            }
         });
     },
 );

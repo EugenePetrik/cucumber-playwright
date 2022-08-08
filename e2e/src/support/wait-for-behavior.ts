@@ -1,5 +1,5 @@
 import { logger } from '../logger';
-import { Page } from 'playwright';
+import { Frame, Page } from 'playwright';
 import { envNumber } from '../env/parseEnv';
 import { ElementLocator } from '../env/global';
 
@@ -14,10 +14,10 @@ export const waitFor = async <T>(predicate: () => T | Promise<T>, options?: { ti
         if (result) return result;
 
         await sleep(wait);
-        logger.log(`Waiting ${wait} ms`);
+        logger.log(`Waiting ${wait}ms`);
     }
 
-    throw new Error(`Wait time of ${timeout} ms exceeded`);
+    throw new Error(`Wait time of ${timeout}ms exceeded`);
 };
 
 export const waitForSelector = async (page: Page, elementIdentifier: ElementLocator): Promise<boolean> => {
@@ -40,6 +40,18 @@ export const waitForSelectorOnPage = async (
 ): Promise<boolean> => {
     try {
         await pages[pageIndex].waitForSelector(elementIdentifier, {
+            state: 'visible',
+            timeout: envNumber('SELECTOR_TIMEOUT'),
+        });
+        return true;
+    } catch (e) {
+        return false;
+    }
+};
+
+export const waitForSelectorInIframe = async (elementIframe: Frame, elementIdentifier: ElementLocator): Promise<boolean> => {
+    try {
+        await elementIframe?.waitForSelector(elementIdentifier, {
             state: 'visible',
             timeout: envNumber('SELECTOR_TIMEOUT'),
         });

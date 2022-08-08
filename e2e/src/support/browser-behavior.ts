@@ -5,7 +5,7 @@ export const getViewPort = (): { width: number; height: number } => {
     let viewPort;
     const emulation = process.env.EMULATION || 'browser';
 
-    if (emulation != 'browser') {
+    if (emulation !== 'browser') {
         const device = devices[emulation];
         viewPort = {
             width: device.viewport.width,

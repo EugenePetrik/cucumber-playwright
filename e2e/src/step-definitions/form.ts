@@ -4,6 +4,7 @@ import { waitFor } from '../support/wait-for-behavior';
 import { getElementLocator } from '../support/web-element-helper';
 import { ScenarioWorld } from './setup/world';
 import { ElementKey } from '../env/global';
+import { parseInput } from '../support/input-helper';
 
 Then(/^I fill in the "([^"]*)" input with "([^"]*)"$/, async function (this: ScenarioWorld, elementKey: ElementKey, input: string) {
     const {
@@ -18,7 +19,8 @@ Then(/^I fill in the "([^"]*)" input with "([^"]*)"$/, async function (this: Sce
         const result = await page.waitForSelector(elementIdentifier, { state: 'visible' });
 
         if (result) {
-            await inputValue(page, elementIdentifier, input);
+            const parsedInput = parseInput(input, globalConfig);
+            await inputValue(page, elementIdentifier, parsedInput);
         }
         return result;
     });

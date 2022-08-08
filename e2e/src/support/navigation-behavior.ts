@@ -7,9 +7,9 @@ export const navigateToPage = async (page: Page, pageId: PageId, { pagesConfig, 
     const hostPath = hostsConfig[`${hostName}`];
 
     const url = new URL(hostPath);
-    const pagesConfigItem = pagesConfig[pageId];
 
-    url.pathname = pagesConfigItem.route;
+    const pageConfigItem = pagesConfig[pageId];
+    url.pathname = pageConfigItem.route;
 
     await page.goto(url.href);
 };
@@ -17,32 +17,28 @@ export const navigateToPage = async (page: Page, pageId: PageId, { pagesConfig, 
 const pathMatchesPageId = (path: string, pageId: PageId, { pagesConfig }: GlobalConfig): boolean => {
     const pageRegexString = pagesConfig[pageId].regex;
     const pageRegex = new RegExp(pageRegexString);
-    return pageRegex.test(path); // "^/$" expect to equal "/"
+    return pageRegex.test(path);
 };
 
 export const currentPathMatchesPageId = (page: Page, pageId: PageId, globalConfig: GlobalConfig): boolean => {
     const { pathname: currentPath } = new URL(page.url());
-    // logger.log('currentPath', currentPath);
     return pathMatchesPageId(currentPath, pageId, globalConfig);
 };
 
 export const getCurrentPageId = (page: Page, globalConfig: GlobalConfig): PageId => {
     const { pagesConfig } = globalConfig;
-    // logger.log('pagesConfig', pagesConfig);
 
     const pageConfigPageIds = Object.keys(pagesConfig);
-    // logger.log('pageConfigPageIds', pageConfigPageIds);
 
     const { pathname: currentPath } = new URL(page.url());
 
-    const currentPageId = pageConfigPageIds.find(pageId => {
-        return pathMatchesPageId(currentPath, pageId, globalConfig);
-    });
-
-    // logger.log('currentPageId', currentPageId);
+    const currentPageId = pageConfigPageIds.find(pageId => pathMatchesPageId(currentPath, pageId, globalConfig));
 
     if (!currentPageId) {
-        throw new Error(`Failed to get page name from current route ${currentPath}, possible pages: ${JSON.stringify(pagesConfig)}`);
+        throw Error(
+            `Failed to get page name from current route ${currentPath}, \
+      possible pages: ${JSON.stringify(pagesConfig)}`,
+        );
     }
 
     return currentPageId;

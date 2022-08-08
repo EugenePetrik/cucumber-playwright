@@ -18,7 +18,9 @@ export class ScenarioWorld extends World {
     }
 
     globalConfig: GlobalConfig;
+
     globalVariables: GlobalVariables;
+
     screen!: Screen;
 
     async init(contextOptions?: BrowserContextOptions): Promise<Screen> {

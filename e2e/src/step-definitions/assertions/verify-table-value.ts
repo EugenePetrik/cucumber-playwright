@@ -1,12 +1,12 @@
-import { When, DataTable } from '@cucumber/cucumber';
+import { DataTable, Then } from '@cucumber/cucumber';
+import { ElementKey } from '../../env/global';
 import { ScenarioWorld } from '../setup/world';
 import { getElementLocator } from '../../support/web-element-helper';
-import { ElementKey } from '../../env/global';
 import { waitFor, waitForSelector } from '../../support/wait-for-behavior';
 import { logger } from '../../logger';
 import { getTableData } from '../../support/html-behavior';
 
-When(
+Then(
     /^the "([^"]*)" table should( not)? equal the following:$/,
     async function (this: ScenarioWorld, elementKey: ElementKey, negate: boolean, dataTable: DataTable) {
         const {

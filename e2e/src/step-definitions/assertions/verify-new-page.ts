@@ -2,9 +2,9 @@ import { Then } from '@cucumber/cucumber';
 import { waitFor, waitForSelectorOnPage } from '../../support/wait-for-behavior';
 import { ScenarioWorld } from '../setup/world';
 import { getElementLocator } from '../../support/web-element-helper';
+import { getElementOnPage, getElementTextWithinPage, getTitleWithinPage } from '../../support/html-behavior';
 import { ElementKey } from '../../env/global';
 import { logger } from '../../logger';
-import { getElementOnPage, getElementTextWithinPage, getTitleWithinPage } from '../../support/html-behavior';
 
 Then(
     /^the "([0-9]+th|[0-9]+st|[0-9]+nd|[0-9]+rd)" (?:tab|window) should( not)? contain the title "(.*)"$/,

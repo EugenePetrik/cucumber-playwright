@@ -1,9 +1,9 @@
 import { Then } from '@cucumber/cucumber';
-import { ScenarioWorld } from '../setup/world';
 import { ElementKey } from '../../env/global';
+import { getElementValue, getAttributeText, getElementText, elementEnabled, getElementTextAtIndex } from '../../support/html-behavior';
+import { ScenarioWorld } from '../setup/world';
 import { getElementLocator } from '../../support/web-element-helper';
 import { waitFor, waitForSelector } from '../../support/wait-for-behavior';
-import { getAttributeText, getElementText, getElementValue, elementEnabled, getElementTextAtIndex } from '../../support/html-behavior';
 import { logger } from '../../logger';
 
 Then(
@@ -23,6 +23,8 @@ Then(
 
             if (elementStable) {
                 const elementText = await getElementText(page, elementIdentifier);
+                logger.debug('elementText ', elementText);
+                logger.debug('expectedElementText ', expectedElementText);
                 return elementText?.includes(expectedElementText) === !negate;
             } else {
                 return elementStable;
@@ -32,7 +34,7 @@ Then(
 );
 
 Then(
-    /^the "([^"]*)" should( not)? equal the text "([^"]*)"$/,
+    /^the "([^"]*)" should( not)? equal the text "(.*)"$/,
     async function (this: ScenarioWorld, elementKey: ElementKey, negate: boolean, expectedElementText: string) {
         const {
             screen: { page },
@@ -57,7 +59,7 @@ Then(
 );
 
 Then(
-    /^the "([^"]*)" should( not)? contain the value "([^"]*)"$/,
+    /^the "([^"]*)" should( not)? contain the value "(.*)"$/,
     async function (this: ScenarioWorld, elementKey: ElementKey, negate: boolean, elementValue: string) {
         const {
             screen: { page },
@@ -82,7 +84,7 @@ Then(
 );
 
 Then(
-    /^the "([^"]*)" should( not)? equal the value "([^"]*)"$/,
+    /^the "([^"]*)" should( not)? equal the value "(.*)"$/,
     async function (this: ScenarioWorld, elementKey: ElementKey, negate: boolean, elementValue: string) {
         const {
             screen: { page },
@@ -139,6 +141,7 @@ Then(
         logger.log(`The ${elementPosition} ${elementKey} should ${negate ? 'not' : ''} contain the text ${expectedElementText}`);
 
         const elementIdentifier = getElementLocator(page, elementKey, globalConfig);
+
         const index = Number(elementPosition.match(/\d/g)?.join('')) - 1;
 
         await waitFor(async () => {

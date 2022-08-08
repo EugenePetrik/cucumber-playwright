@@ -1,7 +1,7 @@
-import { logger } from '../logger';
 import { Frame, Page } from 'playwright';
-import { envNumber } from '../env/parseEnv';
 import { ElementLocator } from '../env/global';
+import { envNumber } from '../env/parseEnv';
+import { logger } from '../logger';
 
 export const waitFor = async <T>(predicate: () => T | Promise<T>, options?: { timeout?: number; wait?: number }): Promise<T> => {
     const { timeout = 20_000, wait = 2_000 } = options || {};

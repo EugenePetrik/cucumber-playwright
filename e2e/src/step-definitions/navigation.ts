@@ -1,8 +1,8 @@
 import { Given } from '@cucumber/cucumber';
-import { PageId } from '../env/global';
-import { navigateToPage, currentPathMatchesPageId, reloadPage } from '../support/navigation-behavior';
+import { currentPathMatchesPageId, navigateToPage, reloadPage } from '../support/navigation-behavior';
 import { ScenarioWorld } from './setup/world';
 import { waitFor } from '../support/wait-for-behavior';
+import { PageId } from '../env/global';
 import { logger } from '../logger';
 
 Given(/^I am on the "([^"]*)" page$/, async function (this: ScenarioWorld, pageId: PageId) {

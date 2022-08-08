@@ -1,12 +1,12 @@
 import { When } from '@cucumber/cucumber';
-import { ScenarioWorld } from './setup/world';
 import { clickElement, clickElementAtIndex } from '../support/html-behavior';
+import { ScenarioWorld } from './setup/world';
 import { waitFor, waitForSelector } from '../support/wait-for-behavior';
 import { getElementLocator } from '../support/web-element-helper';
 import { ElementKey } from '../env/global';
 import { logger } from '../logger';
 
-When(/^I click the "([^"]*)" (?:button|link|icon|element)$/, async function (this: ScenarioWorld, elementKey: ElementKey) {
+When(/^I click the "([^"]*)" (?:button|link)$/, async function (this: ScenarioWorld, elementKey: ElementKey) {
     const {
         screen: { page },
         globalConfig,

@@ -1,8 +1,8 @@
 import dotenv from 'dotenv';
 import { env, getJsonFromFile } from './env/parseEnv';
+import { generateCucumberRuntimeTag } from './support/tag-helper';
 import { GlobalConfig, HostsConfig, PagesConfig, EmailsConfig, PageElementMappings } from './env/global';
 import fs from 'fs';
-import { generateCucumberRuntimeTag } from './support/tag-helper';
 
 const environment = env('NODE_ENV');
 

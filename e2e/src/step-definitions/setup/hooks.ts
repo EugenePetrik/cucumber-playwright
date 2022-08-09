@@ -1,4 +1,4 @@
-import { Before, After, setDefaultTimeout } from '@cucumber/cucumber';
+import { After, Before, setDefaultTimeout } from '@cucumber/cucumber';
 import { getViewPort } from '../../support/browser-behavior';
 import { ScenarioWorld } from './world';
 
@@ -18,8 +18,7 @@ Before(async function (this: ScenarioWorld, scenario) {
         },
     };
 
-    const ready = await this.init(contextOptions);
-    return ready;
+    return this.init(contextOptions);
 });
 
 After(async function (this: ScenarioWorld, scenario) {

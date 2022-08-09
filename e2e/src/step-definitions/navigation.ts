@@ -15,7 +15,10 @@ Given(/^I am on the "([^"]*)" page$/, async function (this: ScenarioWorld, pageI
 
     await navigateToPage(page, pageId, globalConfig);
 
-    await waitFor(() => currentPathMatchesPageId(page, pageId, globalConfig));
+    await waitFor(() => currentPathMatchesPageId(page, pageId, globalConfig), globalConfig, {
+        target: pageId,
+        type: 'page',
+    });
 });
 
 Given(/^I am directed to the "([^"]*)" page$/, async function (this: ScenarioWorld, pageId: PageId) {
@@ -26,7 +29,10 @@ Given(/^I am directed to the "([^"]*)" page$/, async function (this: ScenarioWor
 
     logger.log(`I am directed to the ${pageId} page`);
 
-    await waitFor(() => currentPathMatchesPageId(page, pageId, globalConfig));
+    await waitFor(() => currentPathMatchesPageId(page, pageId, globalConfig), globalConfig, {
+        target: pageId,
+        type: 'page',
+    });
 });
 
 Given(/^I refresh the "([^"]*)" page$/, async function (this: ScenarioWorld, pageId: PageId) {
@@ -39,7 +45,9 @@ Given(/^I refresh the "([^"]*)" page$/, async function (this: ScenarioWorld, pag
 
     await reloadPage(page);
 
-    await waitFor(() => currentPathMatchesPageId(page, pageId, globalConfig), {
-        timeout: 30000,
+    await waitFor(() => currentPathMatchesPageId(page, pageId, globalConfig), globalConfig, {
+        target: pageId,
+        type: 'page',
+        timeout: 30_000,
     });
 });

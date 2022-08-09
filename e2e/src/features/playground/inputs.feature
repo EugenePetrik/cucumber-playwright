@@ -32,6 +32,5 @@ Feature: As a user I can interact with different types of inputs
   @smoke
   @regression
   Scenario: As a user I can interact and assert on input validation
-    Then the "validation label" should contain the text "Error"
-    And the "validation label" should not contain the text "Errors"
-    And the "validation error" should contain the text "Incorrect entry."
+    Then the "outlined error" should contain the text "Error"
+    And the "outlined error text" should contain the text "Incorrect entry."

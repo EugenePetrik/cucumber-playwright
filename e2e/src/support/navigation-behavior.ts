@@ -1,5 +1,6 @@
 import { Page } from 'playwright';
 import { GlobalConfig, PageId } from '../env/global';
+import { waitForResult } from './wait-for-behavior';
 
 export const navigateToPage = async (page: Page, pageId: PageId, { pagesConfig, hostsConfig }: GlobalConfig): Promise<void> => {
     const { UI_AUTOMATION_HOST: hostName = 'localhost' } = process.env;
@@ -20,9 +21,12 @@ const pathMatchesPageId = (path: string, pageId: PageId, { pagesConfig }: Global
     return pageRegex.test(path);
 };
 
-export const currentPathMatchesPageId = (page: Page, pageId: PageId, globalConfig: GlobalConfig): boolean => {
+export const currentPathMatchesPageId = (page: Page, pageId: PageId, globalConfig: GlobalConfig): waitForResult => {
     const { pathname: currentPath } = new URL(page.url());
-    return pathMatchesPageId(currentPath, pageId, globalConfig);
+    if (pathMatchesPageId(currentPath, pageId, globalConfig)) {
+        return waitForResult.PASS;
+    }
+    return waitForResult.ELEMENT_NOT_AVAILABLE;
 };
 
 export const getCurrentPageId = (page: Page, globalConfig: GlobalConfig): PageId => {
@@ -35,10 +39,7 @@ export const getCurrentPageId = (page: Page, globalConfig: GlobalConfig): PageId
     const currentPageId = pageConfigPageIds.find(pageId => pathMatchesPageId(currentPath, pageId, globalConfig));
 
     if (!currentPageId) {
-        throw Error(
-            `Failed to get page name from current route ${currentPath}, \
-      possible pages: ${JSON.stringify(pagesConfig)}`,
-        );
+        throw Error(`Failed to get page name from current route ${currentPath}, possible pages: ${JSON.stringify(pagesConfig)}`);
     }
 
     return currentPageId;

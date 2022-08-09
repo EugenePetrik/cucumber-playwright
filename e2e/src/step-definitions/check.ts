@@ -1,7 +1,7 @@
 import { Then } from '@cucumber/cucumber';
 import { ScenarioWorld } from './setup/world';
 import { checkElement, uncheckElement } from '../support/html-behavior';
-import { waitFor, waitForSelector } from '../support/wait-for-behavior';
+import { waitFor, waitForResult, waitForSelector } from '../support/wait-for-behavior';
 import { getElementLocator } from '../support/web-element-helper';
 import { ElementKey } from '../env/global';
 import { logger } from '../logger';
@@ -18,18 +18,23 @@ Then(
 
         const elementIdentifier = getElementLocator(page, elementKey, globalConfig);
 
-        await waitFor(async () => {
-            const elementStable = await waitForSelector(page, elementIdentifier);
+        await waitFor(
+            async () => {
+                const elementStable = await waitForSelector(page, elementIdentifier);
 
-            if (elementStable) {
-                if (unchecked) {
-                    await uncheckElement(page, elementIdentifier);
-                } else {
-                    await checkElement(page, elementIdentifier);
+                if (elementStable) {
+                    if (unchecked) {
+                        await uncheckElement(page, elementIdentifier);
+                        return waitForResult.PASS;
+                    } else {
+                        await checkElement(page, elementIdentifier);
+                        return waitForResult.PASS;
+                    }
                 }
-            }
-
-            return elementStable;
-        });
+                return waitForResult.ELEMENT_NOT_AVAILABLE;
+            },
+            globalConfig,
+            { target: elementKey },
+        );
     },
 );

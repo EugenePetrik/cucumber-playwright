@@ -23,6 +23,7 @@ yarn-debug.log*
 yarn-error.log*
 
 # E2E
+e2e/dist
 e2e/node_modules
 e2e/reports
 

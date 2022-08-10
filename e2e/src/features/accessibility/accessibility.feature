@@ -1,4 +1,3 @@
-@dev
 Feature: Generate accessibility reports across our website
 
   @accessibility

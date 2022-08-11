@@ -43,3 +43,25 @@ yarn install
 ```bash
 ./run_tests.sh production smoke
 ```
+
+<br/>
+
+### Install API project
+
+1. Open API project
+
+```bash
+cd api_e2e
+```
+
+2. Install dependencies
+
+```bash
+yarn install
+```
+
+3. Run tests
+
+```bash
+npm t
+```

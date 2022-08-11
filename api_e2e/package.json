@@ -1,0 +1,16 @@
+{
+  "name": "api_e2e",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "npx playwright test --reporter=html"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@playwright/test": "^1.25.0",
+    "prettier": "^2.7.1",
+    "typescript": "^4.7.4"
+  }
+}

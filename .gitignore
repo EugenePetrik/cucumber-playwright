@@ -27,3 +27,6 @@ e2e/dist
 e2e/node_modules
 e2e/reports
 
+# API
+api_e2e/node_modules
+api_e2e/playwright-report

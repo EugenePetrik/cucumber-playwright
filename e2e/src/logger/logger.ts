@@ -16,11 +16,22 @@ type Logger = {
     error: LogFunction;
 };
 
+const getDateFormat = () => {
+    const date = new Date();
+    const year = date.getFullYear();
+    const month = date.getMonth() + 1;
+    const day = date.getDate();
+    const hours = date.getHours();
+    const minutes = date.getMinutes();
+    const seconds = date.getSeconds();
+    return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+};
+
 const logFuncAtLevels =
     (logLevels: LogLevel[], logFunction: Logger = console) =>
     (logLevel: LogLevel, ...msg: any[]) => {
         if (logLevel !== OFF && logLevels.indexOf(logLevel) !== -1 && msg.length > 0) {
-            logFunction[logLevel](...msg);
+            logFunction[logLevel](`[${getDateFormat()}]`, ...msg);
         }
     };
 
@@ -42,12 +53,12 @@ const createLogger = (logLevel: LogLevel): Logger => {
     ) as Logger;
 };
 
-const logLevelIsT = <T extends string>(logLevel: string, options: readonly string[]): logLevel is T => {
+const logLevelList = <T extends string>(logLevel: string, options: readonly string[]): logLevel is T => {
     return options.includes(logLevel);
 };
 
 export const stringIsOfOptions = <T extends string>(logLevel: string, options: readonly string[]): T => {
-    if (logLevelIsT(logLevel, options)) {
+    if (logLevelList(logLevel, options)) {
         return logLevel as T;
     }
     throw Error(`🧨 Logger '${logLevel}' needs to be one of ${options} 🧨`);
